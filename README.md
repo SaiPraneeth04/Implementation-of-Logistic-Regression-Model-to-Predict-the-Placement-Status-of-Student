@@ -76,7 +76,42 @@ clf.predict([[0,87,0,95,0,2,78,2,0,0]])
 ```
 
 ## Output:
-![Alt text](<Screenshot (135).png>) ![Alt text](<Screenshot (136).png>) ![Alt text](<Screenshot (137).png>) ![Alt text](<Screenshot (139).png>) ![Alt text](<Screenshot (141).png>) ![Alt text](<Screenshot (142).png>) ![Alt text](<Screenshot (143).png>) ![Alt text](<Screenshot (144).png>) ![Alt text](<Screenshot (145).png>)
+
+### Placement Data:
+![OUTPUT](/4.1.png)
+
+### After Removing Column:
+![OUTPUT](/4.2.png)
+
+### Checking the null function():
+![OUTPUT](/4.3.png)
+
+### Data duplicates:
+![OUTPUT](/4.4.png)
+
+### Print Data:
+![OUTPUT](/4.5.png)
+
+### X :
+![OUTPUT](/4.6.png)
+
+### Y :
+![OUTPUT](/4.7.png)
+
+### Y_Prediction Array :
+![OUTPUT](/4.8.png)
+
+### Accuracy Value:
+![OUTPUT](/4.9.png)
+
+### Confusion Matrix:
+![OUTPUT](/4.10.png)
+
+### Classification Report:
+![OUTPUT](/4.11.png)
+
+### Prediction of LR:
+![OUTPUT](/4.12.png)
 
 
 ## Result:
