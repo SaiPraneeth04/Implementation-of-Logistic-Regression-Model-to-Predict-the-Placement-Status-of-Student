@@ -22,96 +22,78 @@ To write a program to implement the the Logistic Regression Model to Predict the
 Program to implement the the Logistic Regression Model to Predict the Placement Status of Student.
 Developed by: Sai Praneeth K
 RegisterNumber:  212222230067
+```
 
-
+```python
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-dataset=pd.read_csv('Placement_Data_Full_Class.csv')
-dataset
+data=pd.read_csv("/content/Placement_Data.csv")
+data.head()
 
-dataset.head(10)
+data1=data.copy()
+data1=data1.drop(["sl_no","salary"],axis=1)
+data1.head()
 
-dataset=pd.read_csv('Placement_Data_Full_Class.csv')
-dataset=dataset.drop(['sl_no','ssc_p','gender'],axis=1)
-dataset
+data1.isnull().sum()
 
-dataset.shape
+data1.duplicated().sum()
 
-dataset.info()
+from sklearn.preprocessing import LabelEncoder
+le=LabelEncoder()
+data1["gender"]=le.fit_transform(data1["gender"])
+data1["ssc_b"]=le.fit_transform(data1["ssc_b"])
+data1["hsc_b"]=le.fit_transform(data1["hsc_b"])
+data1["hsc_s"]=le.fit_transform(data1["hsc_s"])
+data1["degree_t"]=le.fit_transform(data1["degree_t"])
+data1["workex"]=le.fit_transform(data1["workex"])
+data1["specialisation"]=le.fit_transform(data1["specialisation"] )     
+data1["status"]=le.fit_transform(data1["status"])       
+data1 
 
-dataset["ssc_b"] = dataset["ssc_b"].astype('category')
-dataset["hsc_b"] =dataset["hsc_b"].astype('category')
-dataset["hsc_s"] =dataset["hsc_s"].astype('category')
-dataset["degree_t"] =dataset["degree_t"].astype('category')
-dataset["workex"] =dataset["workex"].astype('category')
-dataset["specialisation"] =dataset["specialisation"].astype('category')
-dataset["status"] =dataset["status"].astype('category')
-dataset
+x=data1.iloc[:,:-1]
+x
 
-dataset["ssc_b"] = dataset["ssc_b"].cat.codes
-dataset["hsc_b"] =dataset["hsc_b"].cat.codes
-dataset["hsc_s"] =dataset["hsc_s"].cat.codes
-dataset["degree_t"] =dataset["degree_t"].cat.codes
-dataset["workex"] =dataset["workex"].cat.codes
-dataset["specialisation"] =dataset["specialisation"].cat.codes
-dataset["status"] =dataset["status"].cat.codes
-dataset
-
-x=dataset.iloc[:, :-1].values
-y=dataset.iloc[:, -1].values
+y=data1["status"]
 y
 
 from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2)
-dataset.head()
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0)
 
 from sklearn.linear_model import LogisticRegression
-clf=LogisticRegression(random_state=0, solve='lbfgs',max_iter=1000).fit(x_train,y_train)
-clf=LogisticRegression()
-clf.fit(x_train,y_train)
-clf.score(x_test,y_test)
+lr=LogisticRegression(solver="liblinear")
+lr.fit(x_train,y_train)
+y_pred=lr.predict(x_test)
+y_pred
 
-clf.predict([[0,87,0,95,0,2,78,2,0,0]])
+from sklearn.metrics import accuracy_score
+accuracy=accuracy_score(y_test,y_pred)
+print("Accuracy Score:",accuracy)
+
+from sklearn.metrics import confusion_matrix
+confusion=confusion_matrix(y_test,y_pred)
+print("\nConfusion Matrix:\n",confusion)
+
+
+from sklearn.metrics import classification_report
+classification_report1 = classification_report(y_test,y_pred)
+print("\nClassification Report:\n",classification_report1)
+
+from sklearn import metrics
+cm_display=metrics.ConfusionMatrixDisplay(confusion_matrix=confusion,display_labels=[True,False])
+cm_display.plot()
+lr.predict([[1,80,1,90,1,1,90,1,0,85,1,85]])
 ```
 
 ## Output:
 
-### Placement Data:
-![OUTPUT](/4.1.png)
+## ACCURACY,CONFUSION MATRIX AND CONFUSION REPORT:
 
-### After Removing Column:
-![OUTPUT](/4.2.png)
+![output](/4.1.png)
 
-### Checking the null function():
-![OUTPUT](/4.3.png)
+## PREDICTION OF LR:
 
-### Data duplicates:
-![OUTPUT](/4.4.png)
+![output](/4.2.png)
 
-### Print Data:
-![OUTPUT](/4.5.png)
 
-### X :
-![OUTPUT](/4.6.png)
-
-### Y :
-![OUTPUT](/4.7.png)
-
-### Y_Prediction Array :
-![OUTPUT](/4.8.png)
-
-### Accuracy Value:
-![OUTPUT](/4.9.png)
-
-### Confusion Matrix:
-![OUTPUT](/4.10.png)
-
-### Classification Report:
-![OUTPUT](/4.11.png)
-
-### Prediction of LR:
-![OUTPUT](/4.12.png)
 
 
 ## Result:
